@@ -30,4 +30,15 @@ public class Procesador {
     public int getAnioFuncionamiento() {
         return anioFuncionamiento;
     }
+
+
+    @Override
+    public String toString() {
+        return "Procesador{" +
+                "id='" + id + '\'' +
+                ", codigo='" + codigo + '\'' +
+                ", estaRefrigerado=" + estaRefrigerado +
+                ", anioFuncionamiento=" + anioFuncionamiento +
+                '}';
+    }
 }

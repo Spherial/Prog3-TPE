@@ -1,5 +1,7 @@
 package tpe_parte1;
 
+import tpe_parte1.utils.CSVReader;
+
 import java.util.HashMap;
 import java.util.List;
 
@@ -14,12 +16,16 @@ public class Servicios {
 
     //TODO: Crear clase que permita crear tareas y procesadores a partir de CSV
     public Servicios(String pathProcesadores, String pathTareas) {
+        CSVReader reader = new CSVReader();
+
+        this.tareas = reader.readTasks(pathTareas);
+        this.procesadores = reader.readProcessors(pathProcesadores);
     }
 
      //Expresar la complejidad temporal del servicio 1.
 
     public Tarea servicio1(String ID) {
-        return null;
+        return tareas.get(ID);
     }
 
     //Expresar la complejidad temporal del servicio 2.

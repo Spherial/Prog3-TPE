@@ -37,5 +37,14 @@ public class Tarea {
         return prioridad;
     }
 
-
+    @Override
+    public String toString() {
+        return "Tarea{" +
+                "id='" + id + '\'' +
+                ", nombre='" + nombre + '\'' +
+                ", tiempoEjecucion=" + tiempoEjecucion +
+                ", esCritica=" + esCritica +
+                ", prioridad=" + prioridad +
+                '}';
+    }
 }
