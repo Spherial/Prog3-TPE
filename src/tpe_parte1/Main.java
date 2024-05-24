@@ -18,5 +18,9 @@ public class Main {
         System.out.println("Tareas no Criticas:");
         System.out.println(noCriticas);
 
+        System.out.println("Filtradas por prioridad");
+        List<Tarea> filtradasXPrioridad = servicios.servicio3(70,100);
+        System.out.println(filtradasXPrioridad);
+
         }
 }

@@ -29,7 +29,7 @@ public class Servicios {
         return tareas.get(ID);
     }
 
-    //Expresar la complejidad temporal del servicio 2.
+    //Complejidad: O(n)
 
     public List<Tarea> servicio2(boolean esCritica) {
         List<Tarea> resultado = new ArrayList<>();
@@ -43,9 +43,17 @@ public class Servicios {
         return resultado;
     }
 
-    //Expresar la complejidad temporal del servicio 3.
+    //Complejidad: O(n)
 
     public List<Tarea> servicio3(int prioridadInferior, int  prioridadSuperior) {
-        return null;
+        List<Tarea> resultado = new ArrayList<>();
+
+        for (Tarea tarea : tareas.values()){
+            if ((tarea.getPrioridad() >= prioridadInferior) && (tarea.getPrioridad() <= prioridadSuperior)){
+                resultado.add(tarea);
+            }
+        }
+
+        return resultado;
     }
 }
