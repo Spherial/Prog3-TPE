@@ -1,3 +1,7 @@
+package tpe_parte1;
+
+import java.util.List;
+
 public class Servicios {
 //Completar con las estructuras y métodos privados que se requieran
 
