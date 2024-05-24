@@ -2,6 +2,7 @@ package tpe_parte1;
 
 import tpe_parte1.utils.CSVReader;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -22,7 +23,7 @@ public class Servicios {
         this.procesadores = reader.readProcessors(pathProcesadores);
     }
 
-     //Expresar la complejidad temporal del servicio 1.
+     //Complejidad: O(1).
 
     public Tarea servicio1(String ID) {
         return tareas.get(ID);
@@ -31,7 +32,15 @@ public class Servicios {
     //Expresar la complejidad temporal del servicio 2.
 
     public List<Tarea> servicio2(boolean esCritica) {
-        return null;
+        List<Tarea> resultado = new ArrayList<>();
+
+        for (Tarea tarea : tareas.values()){
+            if (tarea.EsCritica() == esCritica){
+                resultado.add(tarea);
+            }
+        }
+
+        return resultado;
     }
 
     //Expresar la complejidad temporal del servicio 3.
