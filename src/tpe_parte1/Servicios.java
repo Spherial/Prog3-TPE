@@ -1,12 +1,18 @@
 package tpe_parte1;
 
+import java.util.HashMap;
 import java.util.List;
 
 public class Servicios {
-//Completar con las estructuras y métodos privados que se requieran
+
+    private HashMap<String,Tarea> tareas;
+    private HashMap<String, Procesador> procesadores;
 
     //Expresar la complejidad temporal del constructor.
 
+
+
+    //TODO: Crear clase que permita crear tareas y procesadores a partir de CSV
     public Servicios(String pathProcesadores, String pathTareas) {
     }
 

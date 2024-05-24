@@ -23,7 +23,7 @@ public class Procesador {
         return codigo;
     }
 
-    public boolean isEstaRefrigerado() {
+    public boolean EstaRefrigerado() {
         return estaRefrigerado;
     }
 
