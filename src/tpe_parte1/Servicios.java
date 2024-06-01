@@ -3,6 +3,7 @@ package tpe_parte1;
 import tpe_parte1.utils.CSVReader;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 
@@ -46,7 +47,18 @@ public class Servicios {
     //Complejidad: O(n)
 
     public List<Tarea> servicio3(int prioridadInferior, int  prioridadSuperior) {
+
+
+
+
+
         List<Tarea> resultado = new ArrayList<>();
+
+        // Ordenar las tareas por prioridad
+        //List<Tarea> tareasOrdenadas = new ArrayList<>(tareas.values());
+        //resultado.sort(Comparator.comparingInt(Tarea::getPrioridad));
+
+        // Seleccionar tareas en el rango de prioridad
 
         for (Tarea tarea : tareas.values()){
             if ((tarea.getPrioridad() >= prioridadInferior) && (tarea.getPrioridad() <= prioridadSuperior)){
