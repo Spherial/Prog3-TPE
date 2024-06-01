@@ -9,6 +9,8 @@ import java.util.List;
 
 public class Servicios {
 
+    //Mergeado
+
     private HashMap<String,Tarea> tareas;
     private HashMap<String, Procesador> procesadores;
 
