@@ -1,4 +1,4 @@
-package tpe_parte1;
+package TPEspecial;
 
 public class Tarea {
 

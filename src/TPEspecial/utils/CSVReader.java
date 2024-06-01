@@ -1,7 +1,7 @@
-package tpe_parte1.utils;
+package TPEspecial.utils;
 
-import tpe_parte1.Procesador;
-import tpe_parte1.Tarea;
+import TPEspecial.Procesador;
+import TPEspecial.Tarea;
 
 import java.io.BufferedReader;
 import java.io.File;

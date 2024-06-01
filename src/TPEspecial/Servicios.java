@@ -1,9 +1,8 @@
-package tpe_parte1;
+package TPEspecial;
 
-import tpe_parte1.utils.CSVReader;
+import TPEspecial.utils.CSVReader;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 
@@ -70,4 +69,21 @@ public class Servicios {
 
         return resultado;
     }
+
+
+
+
+    //Implementar solucion via backtracking
+
+    public Solucion backtracking(){
+        return null;
+    }
+
+
+    //Implementar solucion via greedy
+    public Solucion greedy(){
+        return null;
+    }
+
+
 }

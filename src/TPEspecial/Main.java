@@ -1,4 +1,4 @@
-package tpe_parte1;
+package TPEspecial;
 
 import java.util.List;
 
@@ -6,7 +6,7 @@ import java.util.List;
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
-        Servicios servicios = new Servicios("./src/tpe_parte1/datasets/Procesadores.csv", "./src/tpe_parte1/datasets/Tareas.csv");
+        Servicios servicios = new Servicios("./src/TPEspecial/datasets/Procesadores.csv", "./src/TPEspecial/datasets/Tareas.csv");
         System.out.println(servicios.servicio1("T4"));
 
 
