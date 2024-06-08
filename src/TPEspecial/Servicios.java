@@ -102,6 +102,13 @@ public class Servicios {
 
 
         this.backtracking_recursivo(solucionParcial, 0,tareasParaAsignar);
+        if (this.mejorSolucion.vacio()){
+            System.out.println("No se encontro solucion");
+
+
+            return null;
+        }
+
 
 
 

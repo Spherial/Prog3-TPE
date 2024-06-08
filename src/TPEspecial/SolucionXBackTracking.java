@@ -113,6 +113,16 @@ public class SolucionXBackTracking {
 
     }
 
+    public boolean vacio(){
+        for(Procesador p : this.procesadores){
+            //Para cada procesador, pregunta si su lista de tareas esta vacia
+            if (!asignaciones.get(p).isEmpty()){
+                return false;
+            }
+        }
+        return true;
+    }
+
 
 
 }
