@@ -75,13 +75,26 @@ public class Servicios {
 
     //Implementar solucion via backtracking
 
-    public Solucion backtracking(){
+    public SolucionXBackTracking backtracking(int x){
+        SolucionXBackTracking solucionXBackTracking = new SolucionXBackTracking();
+        ArrayList<Tarea> asignadas = new ArrayList<>();
+
+
+
+        return null;
+    }
+
+    private SolucionXBackTracking backtracking_recursivo(SolucionXBackTracking solucionXBackTrackingParcial, ArrayList<Tarea> asignadas, int x){
+
+
+
+
         return null;
     }
 
 
     //Implementar solucion via greedy
-    public Solucion greedy(){
+    public SolucionXBackTracking greedy(){
         return null;
     }
 
