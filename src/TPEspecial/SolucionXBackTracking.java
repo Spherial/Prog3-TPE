@@ -27,7 +27,7 @@ public class SolucionXBackTracking {
 
 
     //Asigna una tarea a un procesador (construye solucion parcial)
-    public void asignarTarea(Procesador procesador, Tarea tarea, int x) {
+    public void asignarTarea(Procesador procesador, Tarea tarea) {
         this.asignaciones.get(procesador).add(tarea);                   //Ahora con la funcion esSolucionValida, no hace
                                                                         //Falta preguntar antes de asignar cada tarea
     }

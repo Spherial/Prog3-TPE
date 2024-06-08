@@ -2,9 +2,7 @@ package TPEspecial;
 
 import TPEspecial.utils.CSVReader;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 public class Servicios {
 
@@ -12,6 +10,9 @@ public class Servicios {
 
     private HashMap<String,Tarea> tareas;
     private HashMap<String, Procesador> procesadores;
+
+    //BACKTRACKING
+    private SolucionXBackTracking mejorSolucion;
 
     //Expresar la complejidad temporal del constructor.
 
@@ -72,24 +73,71 @@ public class Servicios {
 
 
 
-
-    //Implementar solucion via backtracking
-
-    public SolucionXBackTracking backtracking(){
-        //TODO comenzar back
-
-
-
-
-        return null;
+    //Obtener lista con todos los procesadores (Para poder ser usados por la Solucion)
+    private List<Procesador> obtenerProcesadores(){
+        List<Procesador> procesadores = new ArrayList<>();
+        for(Procesador procesador : this.procesadores.values()){
+            procesadores.add(procesador);
+        }
+        return procesadores;
     }
 
-    private SolucionXBackTracking backtracking_recursivo(){
-    //TODO
+
+    //Obtener lista con todas las tareas (lista de tareas asignables)
+    private List<Tarea> obtenerTareas(){
+        List<Tarea> tareas = new ArrayList<>();
+        for(Tarea tarea : this.tareas.values()){
+            tareas.add(tarea);
+        }
+        return tareas;
+    }
 
 
 
-        return null;
+    public SolucionXBackTracking backtracking(){
+        List<Procesador> procesadores = obtenerProcesadores();
+        List<Tarea> tareasParaAsignar = obtenerTareas();
+        SolucionXBackTracking solucionParcial = new SolucionXBackTracking(procesadores, 30); //valor de prueba
+
+
+
+        this.backtracking_recursivo(solucionParcial, 0,tareasParaAsignar);
+
+
+
+
+        return this.mejorSolucion;
+    }
+
+    //NOTA: no devolver nada porque la funcion pisa al atributo mejorSolucion cada vez que encuentra una mejor
+    private void backtracking_recursivo(SolucionXBackTracking solucionParcial, int posicion, List<Tarea> tareasParaAsignar){
+        //Posicion nos sirve para contar cuantas tareas fueron asignadas, en cada llamada se aumenta en 1
+        //y si tiene el mismo valor que la cantidad total de tareas, es porque se intento asignar todas
+
+
+        if (posicion+1 == this.tareas.size()){
+            if (solucionParcial.esSolucionValida()){
+                if(solucionParcial.calcularTiempoTotal() <= this.mejorSolucion.calcularTiempoTotal()){
+                    mejorSolucion = solucionParcial;
+                }
+            }
+            return;
+        }
+
+
+        //Intenta asignar la siguiente tarea
+        Tarea tarea = tareasParaAsignar.get(posicion);
+
+        for(Procesador procesador : this.procesadores.values()){
+            solucionParcial.asignarTarea(procesador,tarea);
+            //Pasa a la siguiente tarea
+            this.backtracking_recursivo(solucionParcial, posicion+1, tareasParaAsignar);
+            solucionParcial.removerTarea(procesador, tarea);
+        }
+
+
+
+
     }
 
 
