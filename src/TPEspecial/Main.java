@@ -22,6 +22,7 @@ public class Main {
         List<Tarea> filtradasXPrioridad = servicios.servicio3(70,100);
         System.out.println(filtradasXPrioridad);
 
-        servicios.backtracking(100);
+        System.out.println("Greedy");
+        servicios.greedy(20).showSolucion();
         }
 }
