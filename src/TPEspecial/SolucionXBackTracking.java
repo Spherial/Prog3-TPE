@@ -60,10 +60,10 @@ public class SolucionXBackTracking {
         }
 
         if (tiempoTotal == 0){
-            System.out.println("RETORNE MAX VALUE");
+
             return Integer.MAX_VALUE;
         }
-        System.out.println("RETORNE NORMAL");
+
         return tiempoTotal;
     }
 
