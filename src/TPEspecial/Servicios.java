@@ -75,17 +75,17 @@ public class Servicios {
 
     //Implementar solucion via backtracking
 
-    public SolucionXBackTracking backtracking(int x){
-        SolucionXBackTracking solucionXBackTracking = new SolucionXBackTracking();
-        ArrayList<Tarea> asignadas = new ArrayList<>();
+    public SolucionXBackTracking backtracking(){
+        //TODO comenzar back
+
 
 
 
         return null;
     }
 
-    private SolucionXBackTracking backtracking_recursivo(SolucionXBackTracking solucionXBackTrackingParcial, ArrayList<Tarea> asignadas, int x){
-
+    private SolucionXBackTracking backtracking_recursivo(){
+    //TODO
 
 
 

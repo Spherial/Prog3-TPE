@@ -10,26 +10,26 @@ public class SolucionXBackTracking {
     private int tiempoMax;
 
 
+
+    //Recibe la lista de procesadores de forma externa, para poder generar la tabla de asignaciones
     public SolucionXBackTracking(List<Procesador> procesadores, int tiempoMax) {
         this.procesadores = procesadores;
         this.tiempoMax = tiempoMax;
         asignaciones = new HashMap<>();
 
-
+        //Para cada procesador (key), existe una lista de tareas asignadas (values)
 
         for(Procesador p : procesadores){
-            ArrayList<Tarea> t = new ArrayList<>();
-            this.asignaciones.put(p, t);
+            ArrayList<Tarea> t = new ArrayList<>(); //Crea la lista de tareas asignadas (empieza vacia)
+            this.asignaciones.put(p, t);            //Se la asigna a ese procesador
         }
     }
 
 
     //Asigna una tarea a un procesador (construye solucion parcial)
     public void asignarTarea(Procesador procesador, Tarea tarea, int x) {
-        this.asignaciones.get(procesador).add(tarea);
-
-
-
+        this.asignaciones.get(procesador).add(tarea);                   //Ahora con la funcion esSolucionValida, no hace
+                                                                        //Falta preguntar antes de asignar cada tarea
     }
 
 
@@ -82,6 +82,36 @@ public class SolucionXBackTracking {
 
 
 
+    //Comprueba que todas y cada una de las asignaciones sean validas (No superar tiempo limite y no mas de 2 criticas)
+    //Se realiza una unica vez cuando se llama esta funcion (antes se validaba por cada tarea que se quisiera asignar)
+    public boolean esSolucionValida(){
+
+        for(Procesador p : this.procesadores){
+
+            ArrayList<Tarea> tareas = this.asignaciones.get(p);
+            int cantidadCriticas = 0;
+            int acum = 0;
+
+            for(Tarea t : tareas){
+
+                if(t.EsCritica())
+                    cantidadCriticas++;
+
+                acum += t.getTiempoEjecucion();
+
+                if(cantidadCriticas >= 2)
+                    return false;
+
+                if(!p.estaRefrigerado() && acum >= tiempoMax)
+                    return false;
+
+            }
+
+        }
+
+        return true;
+
+    }
 
 
 
