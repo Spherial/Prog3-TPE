@@ -13,6 +13,8 @@ public class Servicios {
 
     //BACKTRACKING
     private SolucionXBackTracking mejorSolucion;
+    private int tiempoEjecucionMaximo;
+    private int cantidadCasos;
 
     //Expresar la complejidad temporal del constructor.
 
@@ -24,6 +26,9 @@ public class Servicios {
 
         this.tareas = reader.readTasks(pathTareas);
         this.procesadores = reader.readProcessors(pathProcesadores);
+        this.tiempoEjecucionMaximo = 100;
+        this.mejorSolucion = new SolucionXBackTracking(this.obtenerProcesadores(), this.tiempoEjecucionMaximo);
+        this.cantidadCasos = 0;
     }
 
      //Complejidad: O(1).
@@ -56,11 +61,7 @@ public class Servicios {
 
         List<Tarea> resultado = new ArrayList<>();
 
-        // Ordenar las tareas por prioridad
-        //List<Tarea> tareasOrdenadas = new ArrayList<>(tareas.values());
-        //resultado.sort(Comparator.comparingInt(Tarea::getPrioridad));
 
-        // Seleccionar tareas en el rango de prioridad
 
         for (Tarea tarea : tareas.values()){
             if ((tarea.getPrioridad() >= prioridadInferior) && (tarea.getPrioridad() <= prioridadSuperior)){
@@ -71,6 +72,20 @@ public class Servicios {
         return resultado;
     }
 
+
+
+
+
+
+    //--------------------------------------------------PARTE 2-----------------------------------------------------
+
+    public int getCantidadCasos(){
+        return this.cantidadCasos;
+    }
+
+    public void contarCaso(){
+        cantidadCasos++;
+    }
 
 
     //Obtener lista con todos los procesadores (Para poder ser usados por la Solucion)
@@ -92,12 +107,15 @@ public class Servicios {
         return tareas;
     }
 
-
+    public void setTiempoEjecucionMaximo(int nuevoTiempo){
+        this.tiempoEjecucionMaximo = nuevoTiempo;
+    }
 
     public SolucionXBackTracking backtracking(){
+        contarCaso();
         List<Procesador> procesadores = obtenerProcesadores();
         List<Tarea> tareasParaAsignar = obtenerTareas();
-        SolucionXBackTracking solucionParcial = new SolucionXBackTracking(procesadores, 30); //valor de prueba
+        SolucionXBackTracking solucionParcial = new SolucionXBackTracking(procesadores, this.tiempoEjecucionMaximo);
 
 
 
@@ -112,7 +130,8 @@ public class Servicios {
 
 
 
-
+        this.mejorSolucion.imprimirSolucion();
+        System.out.println("Cantidad de casos: " + this.getCantidadCasos());
         return this.mejorSolucion;
     }
 
@@ -122,10 +141,11 @@ public class Servicios {
         //y si tiene el mismo valor que la cantidad total de tareas, es porque se intento asignar todas
 
 
-        if (posicion+1 == this.tareas.size()){
+        contarCaso();
+        if (posicion == tareasParaAsignar.size()){
             if (solucionParcial.esSolucionValida()){
                 if(solucionParcial.calcularTiempoTotal() <= this.mejorSolucion.calcularTiempoTotal()){
-                    mejorSolucion = solucionParcial;
+                    mejorSolucion = solucionParcial.getCopia();
                 }
             }
             return;

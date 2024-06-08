@@ -17,6 +17,7 @@ public class SolucionXBackTracking {
         this.tiempoMax = tiempoMax;
         asignaciones = new HashMap<>();
 
+
         //Para cada procesador (key), existe una lista de tareas asignadas (values)
 
         for(Procesador p : procesadores){
@@ -39,31 +40,33 @@ public class SolucionXBackTracking {
     }
 
 
+
+
     //Calcula el tiempo maximo de ejecucion que hubo en el procesador mas sobrecargado
-    public int calcularTiempoTotal() {
+    public int calcularTiempoTotal(){
+
         int tiempoTotal = 0;
-        int maximoTiempo = tiempoTotal;
-        for (Procesador key : asignaciones.keySet()) {
-            tiempoTotal = 0;
-            tiempoTotal += calcularTiempoTareas(key);
-            if (tiempoTotal > maximoTiempo) {
-                maximoTiempo = tiempoTotal;
-            }
+        for(Procesador p : this.procesadores) {
+
+            int tiempoAcumulado = 0;
+            List<Tarea> tareas = this.asignaciones.get(p);
+            for (Tarea t : tareas)
+                tiempoAcumulado += t.getTiempoEjecucion();
+
+
+            if (tiempoAcumulado > tiempoTotal)
+                tiempoTotal = tiempoAcumulado;
+
         }
 
-        return maximoTiempo;
-    }
-
-    //Calcula el tiempo que tardan las tareas de X procesador
-    private int calcularTiempoTareas(Procesador procesador) {
-        ArrayList<Tarea> tareas = this.asignaciones.get(procesador);
-        int tiempo = 0;
-        for (Tarea tarea : tareas) {
-            tiempo += tarea.getTiempoEjecucion();
+        if (tiempoTotal == 0){
+            System.out.println("RETORNE MAX VALUE");
+            return Integer.MAX_VALUE;
         }
-
-        return tiempo;
+        System.out.println("RETORNE NORMAL");
+        return tiempoTotal;
     }
+
 
 
 
@@ -123,6 +126,56 @@ public class SolucionXBackTracking {
         return true;
     }
 
+    public void imprimirSolucion(){
+        System.out.println("Backtracking");
+        System.out.println("Solucion obtenida");
+        for(Procesador p : this.procesadores){
+            System.out.println("--------------------------------------------");
+
+            if (p.estaRefrigerado())
+                System.out.println("Procesador Refrigerado: " + p.getId());
+            else
+                System.out.println("Procesador: " + p.getId());
+
+            System.out.println("{");
+            for(Tarea t : this.asignaciones.get(p)){
+                if (t.EsCritica())
+                    System.out.println("Tarea Critica: " + t.getId());
+                else
+                    System.out.println("Tarea: " + t.getId());
+            }
+            System.out.println("}");
+        }
+
+        System.out.println("Tiempo de ejecuccion maximo obtenido: "+ calcularTiempoTotal());
+        System.out.println("Maximo tiempo permitido para no refrigerados: " + this.tiempoMax);
+
+    }
+
+
+    public SolucionXBackTracking getCopia() {
+
+        SolucionXBackTracking copia = new SolucionXBackTracking(procesadores, tiempoMax);
+
+        HashMap<Procesador, ArrayList<Tarea>> copiaTareas = new HashMap<>();
+
+
+        for(Procesador p : procesadores){
+            ArrayList<Tarea> tareas = new ArrayList<>(this.asignaciones.get(p));
+            copiaTareas.put(p, tareas);
+        }
+
+
+        copia.setAsignaciones(copiaTareas);
+
+        return copia;
+    }
+
+
+    //SOLO deberia ser llamado por la funcion de copia
+    private void setAsignaciones(HashMap<Procesador, ArrayList<Tarea>> asignaciones) {
+        this.asignaciones = asignaciones;
+    }
 
 
 }
