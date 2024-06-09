@@ -43,7 +43,7 @@ public class Servicios {
         List<Tarea> resultado = new ArrayList<>();
 
         for (Tarea tarea : tareas.values()){
-            if (tarea.EsCritica() == esCritica){
+            if (tarea.esCritica() == esCritica){
                 resultado.add(tarea);
             }
         }
@@ -169,9 +169,64 @@ public class Servicios {
 
 
     //Implementar solucion via greedy
-    public SolucionXBackTracking greedy(){
-        return null;
+    public SolucionGreedy greedy(int tiempoMaximoNoRefrigerado){
+    	// Inicializar las asignaciones para cada procesador
+    	HashMap<Procesador, ArrayList<Tarea>> asignaciones = new HashMap<>();
+    	
+    	// Carga procesadores a solución
+    	for (Procesador p : procesadores.values()) {
+    		asignaciones.put(p, new ArrayList<Tarea>());
+    	}
+    	
+    	for (Tarea tarea : tareas.values()) {
+    		// Inicializa mejorProcesador y mejorTiempo
+    		Procesador mejorProcesador = null;
+    		int mejorTiempo = Integer.MAX_VALUE;
+
+    		for (HashMap.Entry<Procesador, ArrayList<Tarea>> asignacion : asignaciones.entrySet()) {
+    			// Obtener Proceador para trabajar
+    			Procesador procesador = asignacion.getKey();
+    			
+    			// Valida si no cumple con la asignacion para continuar con el siguiente Proceasdor
+    			if (!new SolucionGreedy().esAsignable(procesador, asignacion.getValue(), tarea, tiempoMaximoNoRefrigerado)) {
+    				continue;
+    			}
+
+    			int tiempoTotalProcesador = calcularTiempoTareas(asignacion.getValue()) + tarea.getTiempoEjecucion();
+
+    			if (mejorProcesador == null) {
+    				mejorProcesador = procesador;
+    				mejorTiempo = tiempoTotalProcesador;
+    			}
+    			else if (tiempoTotalProcesador <= mejorTiempo) {
+    				if (procesador.estaRefrigerado()) {
+    					mejorProcesador = procesador;
+	    				mejorTiempo = tiempoTotalProcesador;
+    				}
+    				else if (!mejorProcesador.estaRefrigerado()) {
+    					mejorProcesador = procesador;
+	    				mejorTiempo = tiempoTotalProcesador;
+    				}
+    			}
+    		}
+
+    		if (mejorProcesador != null) {
+    			asignaciones.get(mejorProcesador).add(tarea);
+    		}
+    	}
+
+    	return new SolucionGreedy(asignaciones,tiempoMaximoNoRefrigerado);
     }
 
+    //Calcula el tiempo que tardan las tareas de X procesador
+    private int calcularTiempoTareas(ArrayList<Tarea> tareas) {
+        int tiempo = 0;
+        if (tareas != null) {
+	        for (Tarea tarea : tareas) {
+	            tiempo += tarea.getTiempoEjecucion();
+	        }
+    	}
+        return tiempo;
+    }
 
 }

@@ -11,6 +11,7 @@ public class Main {
         Servicios servicios = new Servicios("./src/TPEspecial/datasets/Procesadores.csv", "./src/TPEspecial/datasets/Tareas.csv");
 
         SolucionXBackTracking sol = servicios.backtracking();
-
+        
+        servicios.greedy(50).showSolucion();
         }
 }
