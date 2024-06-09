@@ -75,7 +75,7 @@ public class SolucionXBackTracking {
     private int getCantCriticas(Procesador procesador){
         int cantidad = 0;
         for (Tarea tarea : this.asignaciones.get(procesador)) {
-            if (tarea.EsCritica()){
+            if (tarea.esCritica()){
                 cantidad++;
             }
         }
@@ -97,7 +97,7 @@ public class SolucionXBackTracking {
 
             for(Tarea t : tareas){
 
-                if(t.EsCritica())
+                if(t.esCritica())
                     cantidadCriticas++;
 
                 acum += t.getTiempoEjecucion();
@@ -139,7 +139,7 @@ public class SolucionXBackTracking {
 
             System.out.println("{");
             for(Tarea t : this.asignaciones.get(p)){
-                if (t.EsCritica())
+                if (t.esCritica())
                     System.out.println("Tarea Critica: " + t.getId());
                 else
                     System.out.println("Tarea: " + t.getId());

@@ -29,7 +29,7 @@ public class Tarea {
         return tiempoEjecucion;
     }
 
-    public boolean EsCritica() {
+    public boolean esCritica() {
         return esCritica;
     }
 
